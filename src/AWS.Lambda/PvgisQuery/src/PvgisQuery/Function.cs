@@ -225,7 +225,7 @@ namespace PvgisQuery {
 
                 return new StreamReader(stream).ReadToEnd();
             }
-            catch (Exception _) {
+            catch {
                 // We have no way of logging the error, so might as well, sadly, just supress it.
                 return null;
             }
