@@ -24,7 +24,7 @@ namespace PvgisQuery {
                 !body.lng.HasValue) {
 
                 return JsonConvert.SerializeObject(
-                    new {
+                    new ClientError {
                         reason = "client_error",
                         errors = new[] {
                             "Both 'lat' and 'lng' are required."
@@ -82,7 +82,7 @@ namespace PvgisQuery {
 
             if (string.IsNullOrWhiteSpace(html)) {
                 return JsonConvert.SerializeObject(
-                    new {
+                    new ClientError {
                         reason = "pvgis_error",
                         errors = new[] {
                             "No valid daily radiation data."
@@ -95,7 +95,7 @@ namespace PvgisQuery {
 
             if (values == null) {
                 return JsonConvert.SerializeObject(
-                    new {
+                    new ClientError {
                         reason = "pvgis_error",
                         errors = new[] {
                             "Unable to parse data from PVGIS."
@@ -286,6 +286,11 @@ namespace PvgisQuery {
         }
 
         #region Helper classes
+
+        public class ClientError {
+            public string reason { get; set; }
+            public string[] errors { get; set; }
+        }
 
         public class RequestPostBody {
             public double? lat { get; set; }

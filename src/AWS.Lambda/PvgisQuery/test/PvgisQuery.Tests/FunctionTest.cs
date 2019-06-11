@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Xunit;
 using Amazon.Lambda.TestUtilities;
 using Newtonsoft.Json;
@@ -32,9 +31,9 @@ namespace PvgisQuery.Tests {
                 },
                 new TestLambdaContext());
 
-            var obj = JsonConvert.DeserializeObject<ResponseBody>(json);
+            var obj = JsonConvert.DeserializeObject<Function.ResponseBody>(json);
 
-            Assert.IsType<ResponseBody>(obj);
+            Assert.IsType<Function.ResponseBody>(obj);
         }
 
         /// <summary>
@@ -46,36 +45,9 @@ namespace PvgisQuery.Tests {
                 new Function.RequestPostBody(),
                 new TestLambdaContext());
 
-            var error = JsonConvert.DeserializeObject<ClientError>(json);
+            var error = JsonConvert.DeserializeObject<Function.ClientError>(json);
 
-            Assert.IsType<ClientError>(error);
+            Assert.IsType<Function.ClientError>(error);
         }
-
-        #region Helper classes
-
-        public class ResponseBody {
-            public Dictionary<string, Monthly> monthlyAverage { get; set; }
-            public Monthly yearlyAverage { get; set; }
-            public Yearly yearlyTotal { get; set; }
-
-            public class Monthly {
-                public decimal ed { get; set; }
-                public decimal em { get; set; }
-                public decimal hd { get; set; }
-                public decimal hm { get; set; }
-            }
-
-            public class Yearly {
-                public decimal e { get; set; }
-                public decimal h { get; set; }
-            }
-        }
-
-        public class ClientError {
-            public string reason { get; set; }
-            public string[] errors { get; set; }
-        }
-
-        #endregion
     }
 }
