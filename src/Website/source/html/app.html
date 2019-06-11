@@ -3,9 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>PVGIS</title>
-
-        <!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed|Roboto+Mono|Alegreya:700"> -->
+        <title>PVGIS API</title>
 
         <meta property="og:title" content="PVGIS API">
         <meta property="og:type" content="website">
@@ -15,20 +13,20 @@
         {{ css }}
     </head>
     <body>
-        <wrapper>
+        <header>
             <h1>PVGIS</h1>
-
+            <summary>
+                API to get solar irradiation data from the <a href="http://re.jrc.ec.europa.eu/pvgis/">Europe JRC</a> Photovoltaic Geographical Information System (PVGIS) service.
+            </summary>
+        </header>
+        <article>
             <ul>
                 <li><a href="#overview">Overview</a></li>
                 <li><a href="#apidocumentation">API Documentation</a></li>
                 <li><a href="#examples">Examples</a></li>
             </ul>
 
-            <summary id="overview">
-                API to get solar irradiation data from the <a href="http://re.jrc.ec.europa.eu/pvgis/">Europe JRC</a> Photovoltaic Geographical Information System (PVGIS) service.
-            </summary>
-
-            <p>
+            <p id="overview">
                 Solar energy is one of the environmentally sustainable resources for producing electricity using photovoltaic (PV) systems. The main input data used in the planning process is solar radiation. The <a href="http://re.jrc.ec.europa.eu/pvgis/">Europe JRC</a> has an <a href="http://re.jrc.ec.europa.eu/pvgis/apps4/pvest.php">app</a> online which you can use to calculate PV values, bus sadly they have no (good) API. That's where this website/API comes into play.
             </p>
 
@@ -187,9 +185,13 @@
                 <code>POST</code> <code>https://api.pvgisjson.com/query</code>
             </p>
 
+            <p>
+                <button data-id="json-minimum">Try it</button> View results in console.
+            </p>
+
             <h4>Payload</h4>
 
-            <pre class="json-beautify">{"lat":63.35689,"lng":10.39553}</pre>
+            <pre class="json-beautify" id="json-minimum">{"lat":63.35689,"lng":10.39553}</pre>
 
             <h4>Response</h4>
 
@@ -205,18 +207,24 @@
                 <code>POST</code> <code>https://api.pvgisjson.com/query</code>
             </p>
 
-            <h4>Payload</h4>
-
-            <pre class="json-beautify">{"lat":63.35689,"lng":10.39553,"peakpower":1,"losses":14,"slope":35,"azimuth":0,"pvtech":"crystsi","mounting":"free"}</pre>
-
             <p>
-                The response for this would be the same as the example above.
+                <button data-id="json-full">Try it</button> View results in console.
             </p>
 
-            <footer>
-                &copy; 2019 Stian Hanger, source code available over at <a href="https://github.com/nagilum/pvgis">https://github.com/nagilum/pvgis</a>
-            </footer>
-        </wrapper>
+            <h4>Payload</h4>
+
+            <pre class="json-beautify" id="json-full">{"lat":63.35689,"lng":10.39553,"peakpower":1,"losses":14,"slope":35,"azimuth":0,"pvtech":"crystsi","mounting":"free"}</pre>
+
+            <p>
+                The response for this would be the same as the <a href="#minimum">minimum example</a> above.
+            </p>
+        </article>
+
+        <footer>
+            <p>
+                &copy; 2019 Stian Hanger, source code available over at <a href="https://github.com/nagilum/pvgis">https://github.com/nagilum/pvgis</a>. Website favicon by <a href="http://www.iconarchive.com/artist/dapino.html">DaPino</a>.
+            </p>
+        </footer>
 
         {{ js }}
     </body>

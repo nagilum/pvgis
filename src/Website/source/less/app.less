@@ -3,25 +3,110 @@
 }
 
 body {
-    wrapper {
-        display: block;
-        margin: auto;
-        width: 800px;
+    background-color: #fff;
+    color: #000;
+    margin: 0;
+    padding: 0;
 
-        table {
-            width: 100%;
+    a {
+        color: #00c;
+        text-decoration: underline;
 
-            thead {
-                tr {
-                    th {
-                        text-align: left;
-                    }
-                }
+        &:hover {
+            color: #009;
+            text-decoration: none;
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        margin: 2rem 0 1rem;
+        padding: 0;
+    }
+
+    header {
+        background-color: #333;
+        color: #fff;
+        margin: 0;
+        padding: 32px 0;
+
+        h1 {            
+            margin: 0 auto;
+            padding: 0;
+            width: 768px;
+
+            @media (max-width: 800px) {
+                padding: 0 16px;
+                width: 100%;
             }
         }
 
+        summary {
+            margin: 0 auto;
+            padding: 0;
+            width: 768px;
+
+            a {
+                color: #ccc;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+
+            @media (max-width: 800px) {
+                padding: 0 16px;
+                width: 100%;
+            }
+        }
+    }
+
+    article {
+        margin: 0 auto;
+        padding: 0;
+        width: 768px;
+
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+        }
+
+        pre {
+            background-color: #eee;
+            padding: 5px;
+        }
+
         @media (max-width: 800px) {
+            padding: 0 16px;
             width: 100%;
+        }
+    }
+
+    footer {
+        background-color: #333;
+        color: #fff;
+        margin: 0;
+        padding: 32px 0;
+
+        p {
+            margin: 0 auto;
+            padding: 0;
+            width: 768px;
+
+            a {
+                color: #ccc;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+
+            @media (max-width: 800px) {
+                padding: 0 16px;
+                width: 100%;
+            }
         }
     }
 }
