@@ -24,6 +24,7 @@
                 <li><a href="#overview">Overview</a></li>
                 <li><a href="#apidocumentation">API Documentation</a></li>
                 <li><a href="#examples">Examples</a></li>
+                <li><a href="#legend">Response Body Explanation</a></li>
             </ul>
 
             <p id="overview">
@@ -189,13 +190,13 @@
                 <button data-id="json-minimum">Try it</button> View results in console.
             </p>
 
-            <h4>Payload</h4>
+            <h4>Request Body</h4>
 
             <pre class="json-beautify" id="json-minimum">{"lat":63.35689,"lng":10.39553}</pre>
 
-            <h4>Response</h4>
+            <h4>Response Body</h4>
 
-            <pre class="json-beautify">{"monthlyAverage":{"Jan":{"ed":0.42,"em":13.1,"hd":0.49,"hm":15.2},"Feb":{"ed":1.35,"em":37.8,"hd":1.59,"hm":44.6},"Mar":{"ed":2.39,"em":74.1,"hd":2.93,"hm":90.8},"Apr":{"ed":3.31,"em":99.2,"hd":4.21,"hm":126.0},"May":{"ed":3.82,"em":118.0,"hd":5.04,"hm":156.0},"Jun":{"ed":3.98,"em":119.0,"hd":5.35,"hm":160.0},"Jul":{"ed":3.59,"em":111.0,"hd":4.86,"hm":151.0},"Aug":{"ed":2.94,"em":91.2,"hd":3.95,"hm":122.0},"Sep":{"ed":2.09,"em":62.6,"hd":2.68,"hm":80.3},"Oct":{"ed":1.24,"em":38.5,"hd":1.53,"hm":47.3},"Nov":{"ed":0.59,"em":17.7,"hd":0.70,"hm":21.0},"Dec":{"ed":0.19,"em":5.97,"hd":0.23,"hm":7.19}},"yearlyAverage":{"ed":2.16,"em":65.8,"hd":2.80,"hm":85.2},"yearlyTotal":{"e":789.0,"h":1020.0}}</pre>
+            <pre class="json-beautify">{"monthlyAverage":{"jan":{"ed":0.42,"em":13.1,"hd":0.49,"hm":15.2},"feb":{"ed":1.35,"em":37.8,"hd":1.59,"hm":44.6},"mar":{"ed":2.39,"em":74.1,"hd":2.93,"hm":90.8},"apr":{"ed":3.31,"em":99.2,"hd":4.21,"hm":126.0},"may":{"ed":3.82,"em":118.0,"hd":5.04,"hm":156.0},"jun":{"ed":3.98,"em":119.0,"hd":5.35,"hm":160.0},"jul":{"ed":3.59,"em":111.0,"hd":4.86,"hm":151.0},"aug":{"ed":2.94,"em":91.2,"hd":3.95,"hm":122.0},"sep":{"ed":2.09,"em":62.6,"hd":2.68,"hm":80.3},"oct":{"ed":1.24,"em":38.5,"hd":1.53,"hm":47.3},"nov":{"ed":0.59,"em":17.7,"hd":0.70,"hm":21.0},"dec":{"ed":0.19,"em":5.97,"hd":0.23,"hm":7.19}},"yearlyAverage":{"ed":2.16,"em":65.8,"hd":2.80,"hm":85.2},"yearlyTotal":{"e":789.0,"h":1020.0}}</pre>
 
             <h3 id="full">Full</h3>
 
@@ -211,13 +212,26 @@
                 <button data-id="json-full">Try it</button> View results in console.
             </p>
 
-            <h4>Payload</h4>
+            <h4>Request Body</h4>
 
             <pre class="json-beautify" id="json-full">{"lat":63.35689,"lng":10.39553,"peakpower":1,"losses":14,"slope":35,"azimuth":0,"pvtech":"crystsi","mounting":"free"}</pre>
 
             <p>
-                The response for this would be the same as the <a href="#minimum">minimum example</a> above.
+                The response body for this would be the same as the <a href="#minimum">minimum example</a> above.
             </p>
+
+            <h2 id="legend">Response Body Explanation</h2>
+
+            <p>
+                In the API response body you will see values named <em>ed</em>, <em>em</em>, <em>hd</em>, and <em>hm</em>.
+            </p>
+
+            <ul>
+                <li><em>E<sub>d</sub></em> - Average daily electricity production from the given system (kWh).</li>
+                <li><em>E<sub>m</sub></em> - Average monthly electricity production from the given system (kWh).</li>
+                <li><em>H<sub>d</sub></em> - Average daily sum of global irradiation per square meter received by the modules of the given system (kWh/m<sup>2</sup>).</li>
+                <li><em>H<sub>m</sub></em> - Average sum of global irradiation per square meter received by the modules of the given system (kWh/m<sup>2</sup>).</li>
+            </ul>
         </article>
 
         <footer>

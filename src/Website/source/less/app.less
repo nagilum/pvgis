@@ -65,7 +65,7 @@ body {
 
     article {
         margin: 0 auto;
-        padding: 0;
+        padding: 0 0 50px;
         width: 768px;
 
         code {
@@ -76,6 +76,24 @@ body {
         pre {
             background-color: #eee;
             padding: 5px;
+
+            span {
+                &.default {
+                    color: #000;
+                }
+
+                &.key {
+                    color: #099;
+                }
+
+                &.number {
+                    color: #600;
+                }
+
+                &.string {
+                    color: #660;
+                }
+            }
         }
 
         @media (max-width: 800px) {
