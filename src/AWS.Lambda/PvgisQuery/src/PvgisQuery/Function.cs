@@ -59,14 +59,92 @@ namespace PvgisQuery {
                 body.mounting = "free";
             }
 
+            // Verify
+            if (body.peakpower.Value < 1) {
+                return JsonConvert.SerializeObject(
+                    new ClientError {
+                        reason = "client_error",
+                        errors = new[] {
+                            "'peakpower' must be 1 or greater."
+                        }
+                    });
+            }
+
+            if (body.losses.Value < 0 ||
+                body.losses.Value > 100) {
+
+                return JsonConvert.SerializeObject(
+                    new ClientError {
+                        reason = "client_error",
+                        errors = new[] {
+                            "'losses' must be between 0 (including) and 100 (including)."
+                        }
+                    });
+            }
+
+            if (body.slope.Value < 0 ||
+                body.slope.Value > 90) {
+
+                return JsonConvert.SerializeObject(
+                    new ClientError {
+                        reason = "client_error",
+                        errors = new[] {
+                            "'slope' must be between 0 (including) and 90 (including)."
+                        }
+                    });
+            }
+
+            if (body.azimuth.Value < -180 ||
+                body.azimuth.Value > 180) {
+
+                return JsonConvert.SerializeObject(
+                    new ClientError {
+                        reason = "client_error",
+                        errors = new[] {
+                            "'azimuth' must be between -180 (including) and 180 (including)."
+                        }
+                    });
+            }
+
+            switch (body.pvtech.ToLower()) {
+                case "crystsi":
+                case "cis":
+                case "cdte":
+                    break;
+
+                default:
+                    return JsonConvert.SerializeObject(
+                        new ClientError {
+                            reason = "client_error",
+                            errors = new[] {
+                                "'pvtech' must be either crystSi, CIS, or CdTe."
+                            }
+                        });
+            }
+
+            switch (body.mounting.ToLower()) {
+                case "free":
+                case "building":
+                    break;
+
+                default:
+                    return JsonConvert.SerializeObject(
+                        new ClientError {
+                            reason = "client_error",
+                            errors = new[] {
+                                "'mounting' must be either free or building."
+                            }
+                        });
+            }
+
             // Query the actual Europa PVGIS server.
             var html = QueryPvgisEuropa(new Dictionary<string, string> {
                 {"MAX_FILE_SIZE", "10000"},
                 {"pv_database", "PVGIS-classic"},
-                {"pvtechchoice", body.pvtech},
+                {"pvtechchoice", body.pvtech.ToLower()},
                 {"peakpower", body.peakpower.Value.ToString(culture)},
                 {"efficiency", body.losses.Value.ToString(culture)},
-                {"mountingplace", body.mounting},
+                {"mountingplace", body.mounting.ToLower()},
                 {"angle", body.slope.Value.ToString(culture)},
                 {"aspectangle", body.azimuth.Value.ToString(culture)},
                 {"horizonfile", ""},
