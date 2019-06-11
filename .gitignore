@@ -1,0 +1,9 @@
+src/AWS.Lambda/PvgisQuery/.vs/
+
+src/AWS.Lambda/PvgisQuery/src/PvgisQuery/.vs/
+src/AWS.Lambda/PvgisQuery/src/PvgisQuery/bin/
+src/AWS.Lambda/PvgisQuery/src/PvgisQuery/obj/
+
+src/AWS.Lambda/PvgisQuery/test/PvgisQuery.Tests/.vs/
+src/AWS.Lambda/PvgisQuery/test/PvgisQuery.Tests/bin/
+src/AWS.Lambda/PvgisQuery/test/PvgisQuery.Tests/obj/
