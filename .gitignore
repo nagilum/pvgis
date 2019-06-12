@@ -1,5 +1,8 @@
 src/AWS.Lambda/PvgisQuery/.vs/
 
+src/AWS.Lambda/PvgisQuery/src/PvgisQuery/Properties/
+src/AWS.Lambda/PvgisQuery/src/PvgisQuery/PvgisQuery.csproj.user
+
 src/AWS.Lambda/PvgisQuery/src/PvgisQuery/.vs/
 src/AWS.Lambda/PvgisQuery/src/PvgisQuery/bin/
 src/AWS.Lambda/PvgisQuery/src/PvgisQuery/obj/
