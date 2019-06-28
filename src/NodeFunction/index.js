@@ -264,11 +264,13 @@ app.post('/', (req, res) => {
     .then((values) => {
         res
             .set('Access-Control-Allow-Origin', origin)
+            .set('Access-Control-Allow-Headers', 'Content-Type')
             .json(values);
     })
     .catch((err) => {
         res
             .set('Access-Control-Allow-Origin', origin)
+            .set('Access-Control-Allow-Headers', 'Content-Type')
             .status(400)
             .json(err);
     });
@@ -284,6 +286,7 @@ app.options('/', (req, res) => {
 
     res
         .set('Access-Control-Allow-Origin', origin)
+        .set('Access-Control-Allow-Headers', 'Content-Type')
         .status(200)
         .end();
 });
