@@ -48,11 +48,11 @@ let tryItExecute = (e) => {
     console.log('PVGIS API Example');
     console.log('=================');
 
-    console.log('POST https://api.pvgisjson.com/query');
+    console.log('POST https://api.pvgisjson.com/');
     console.log('Request Body', JSON.parse(json));
 
     return fetch(
-        'https://api.pvgisjson.com/query',
+        'https://api.pvgisjson.com/',
         {
             method: 'POST',
             mode: 'cors',
