@@ -12,15 +12,21 @@ const hostname = 'localhost',
 app.use(bodyParser.json());
 
 /**
+ * Search and replace all instances.
+ * @param {String} search Text to search for.
+ * @param {String} replacement Text to replace with.
+ * @returns {String} Fixed string.
+ */
+String.prototype.replaceAll = function(search, replacement) {
+    return this.replace(new RegExp(search, 'g'), replacement);
+};
+
+/**
  * Query the actual Europa PVGIS server.
  * @param {Object} obj Parameters for call.
  * @returns {Promise}
  */
 var QueryPvgisEurope = (obj) => {
-    console.log('=======================================================');
-    console.log('Function: QueryPvgisEurope');
-    console.log('obj', obj);
-
     return new Promise((resolve, reject) => {
         let options = {
             url: 'http://re.jrc.ec.europa.eu/pvgis/apps4/PVcalc.php',
@@ -32,12 +38,7 @@ var QueryPvgisEurope = (obj) => {
             }
         };
 
-        console.log('options', options);
-
         request.post(options, (err, res, body) => {
-            console.log('err', err);
-            console.log('body', body);
-
             return err
                 ? reject(err)
                 : resolve(body);
@@ -46,16 +47,120 @@ var QueryPvgisEurope = (obj) => {
 };
 
 /**
+ * Get values from a yearly row.
+ * @param {String} html HTML to parse.
+ * @param {String} sf Key to search for.
+ * @returns {Object}
+ */
+var GetYearlyRowFromHTML = (html, sf) => {
+    let key = '<td><b>' + sf + '</b></td>',
+        sp = html.indexOf(key);
+
+    if (sp === -1) {
+        return null;
+    }
+
+    let temp = html.substr(sp + key.length);
+
+    sp = temp.indexOf('</td> </tr>');
+
+    if (sp === -1) {
+        return null;
+    }
+
+    temp = temp
+        .substr(0, sp)
+        .replaceAll('<td align="right" colspan=2 >', ',')
+        .replaceAll('<b>', '')
+        .replaceAll('</b>', '')
+        .replaceAll('</td>', '');
+
+    let values = temp.split(',');
+
+    if (values.length !== 3) {
+        return null;
+    }
+
+    return {
+        e: parseFloat(values[1].trim()),
+        h: parseFloat(values[2].trim())
+    };
+};
+
+/**
+ * Get values from a monthly row.
+ * @param {String} html HTML to parse.
+ * @param {String} month Name of month to fetch data for.
+ * @returns {Object}
+ */
+var GetMonthlyRowFromHTML = (html, month) => {
+    let key = '<td> ' + month + ' </td>',
+        sp = html.indexOf(key);
+
+    if (sp === -1) {
+        key = '<td><b> ' + month + ' </b></td>';
+        sp = html.indexOf(key);
+    }
+
+    if (sp === -1) {
+        return null;
+    }
+
+    let temp = html.substr(sp + key.length);
+
+    sp = temp.indexOf('</td></tr>');
+
+    if (sp === -1) {
+        return null;
+    }
+
+    temp = temp
+        .substr(0, sp)
+        .replaceAll('</td>', '')
+        .replaceAll('<b>', '')
+        .replaceAll('</b>', '')
+        .replaceAll('<td align="right">', ',');
+
+    let values = temp.split(',');
+
+    if (values.length !== 5) {
+        return null;
+    }
+
+    return {
+        ed: parseFloat(values[1].trim()),
+        em: parseFloat(values[2].trim()),
+        hd: parseFloat(values[3].trim()),
+        hm: parseFloat(values[4].trim())
+    };
+};
+
+/**
  * Parse the incoming HTML and return usable values.
  * @param {String} html HTML from PVGIS Europe.
  * @return {Promise}
  */
 var ParsePvgisHtml = (html) => {
-    console.log('=======================================================');
-    console.log('Function: ParsePvgisHtml');
-    console.log('html', html);
-
-    return new Promise((resolve, reject) => { return reject(null); });
+    return new Promise((resolve, reject) => {
+        return resolve({
+            monthlyAverage: {
+                jan: GetMonthlyRowFromHTML(html, 'Jan'),
+                feb: GetMonthlyRowFromHTML(html, 'Feb'),
+                mar: GetMonthlyRowFromHTML(html, 'Mar'),
+                apr: GetMonthlyRowFromHTML(html, 'Apr'),
+                may: GetMonthlyRowFromHTML(html, 'May'),
+                jun: GetMonthlyRowFromHTML(html, 'Jun'),
+                jul: GetMonthlyRowFromHTML(html, 'Jul'),
+                aug: GetMonthlyRowFromHTML(html, 'Aug'),
+                sep: GetMonthlyRowFromHTML(html, 'Sep'),
+                oct: GetMonthlyRowFromHTML(html, 'Oct'),
+                nov: GetMonthlyRowFromHTML(html, 'Nov'),
+                dec: GetMonthlyRowFromHTML(html, 'Dec')
+            },
+            yearlyAverage: GetMonthlyRowFromHTML(html, 'Yearly average'),
+            yearlyTotal: GetYearlyRowFromHTML(html, 'Total for year')
+        });
+    });
 };
 
 /**
@@ -69,7 +174,7 @@ app.post('/', (req, res) => {
         slope = req.body.slope ? req.body.slope : 35,
         azimuth = req.body.azimuth ? req.body.azimuth : 0,
         mounting = req.body.mounting ? req.body.mounting.toLowerCase() : 'free',
-        pvtech = req.body.pvtech ? req.body.pvtech.toLowerCase() : 'crystsi',
+        pvtech = req.body.pvtech ? req.body.pvtech : 'crystSi',
         error;
 
     // Verify payload data.
@@ -104,9 +209,9 @@ app.post('/', (req, res) => {
     }
 
     switch (pvtech) {
-        case 'crystsi':
-        case 'cis':
-        case 'cdte':
+        case 'crystSi':
+        case 'CIS':
+        case 'CdTe':
             break;
 
         default:
@@ -135,7 +240,6 @@ app.post('/', (req, res) => {
                 mountingplace: mounting,
                 angle: slope.toString(),
                 aspectangle: azimuth.toString(),
-                horizonfile: '',
                 outputchoicebuttons: 'window',
                 sbutton: 'Calculate',
                 outputformatchoice: 'window',
@@ -147,10 +251,6 @@ app.post('/', (req, res) => {
             }));
     })
     .then((html) => {
-        console.log('=======================================================');
-        console.log('Function: Then1');
-        console.log('html', html);
-
         if (!html) {
             throw new Error('No valid daily radiation data.');
         }
@@ -158,18 +258,9 @@ app.post('/', (req, res) => {
         return ParsePvgisHtml(html);
     })
     .then((values) => {
-        console.log('=======================================================');
-        console.log('Function: Then2');
-        console.log('values', values);
-
-        // TODO: Output a formatted PVGIS JSON object.
         res.json(values);
     })
     .catch((err) => {
-        console.log('=======================================================');
-        console.log('Function: PromiseErrorHandler');
-        console.log('err', err);
-
         res
             .status(400)
             .json(err);
