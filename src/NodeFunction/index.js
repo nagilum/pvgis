@@ -167,6 +167,10 @@ var ParsePvgisHtml = (html) => {
  * Get post data from client and re-query the PVGIS service.
  */
 app.post('/', (req, res) => {
+    let origin = req.headers['origin']
+        ? req.headers['origin']
+        : '*';
+
     let lat = req.body.lat,
         lng = req.body.lng,
         peakpower = req.body.peakpower ? req.body.peakpower : 1,
@@ -258,13 +262,30 @@ app.post('/', (req, res) => {
         return ParsePvgisHtml(html);
     })
     .then((values) => {
-        res.json(values);
+        res
+            .set('Access-Control-Allow-Origin', origin)
+            .json(values);
     })
     .catch((err) => {
         res
+            .set('Access-Control-Allow-Origin', origin)
             .status(400)
             .json(err);
     });
+});
+
+/**
+ * Handle CORS.
+ */
+app.options('/', (req, res) => {
+    let origin = req.headers['origin']
+        ? req.headers['origin']
+        : '*';
+
+    res
+        .set('Access-Control-Allow-Origin', origin)
+        .status(200)
+        .end();
 });
 
 // Done, let's fire up the app.
