@@ -27,6 +27,9 @@ String.prototype.replaceAll = function(search, replacement) {
  * @returns {Promise}
  */
 var QueryPvgisEurope = (obj) => {
+    console.log('Function: QueryPvgisEurope');
+    console.log('obj', obj);
+
     return new Promise((resolve, reject) => {
         let options = {
             url: 'http://re.jrc.ec.europa.eu/pvgis/apps4/PVcalc.php',
@@ -34,11 +37,19 @@ var QueryPvgisEurope = (obj) => {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Content-Encoding': 'UTF8',
-                'User-Agent': 'QueryPvgis'
+                'User-Agent': 'QueryPvgis/1.0.0'
             }
         };
 
         request.post(options, (err, res, body) => {
+            console.log('Function: QueryPvgisEurope => Response');
+            console.log('err', err);
+            console.log('body', body);
+
+            if (!body) {
+                err = new Error('http://re.jrc.ec.europa.eu/pvgis/apps4/PVcalc.php did not return a valid response!');
+            }
+
             return err
                 ? reject(err)
                 : resolve(body);
@@ -53,6 +64,8 @@ var QueryPvgisEurope = (obj) => {
  * @returns {Object}
  */
 var GetYearlyRowFromHTML = (html, sf) => {
+    console.log('Function: GetYearlyRowFromHTML');
+
     let key = '<td><b>' + sf + '</b></td>',
         sp = html.indexOf(key);
 
@@ -81,10 +94,13 @@ var GetYearlyRowFromHTML = (html, sf) => {
         return null;
     }
 
-    return {
+    let obj = {
         e: parseFloat(values[1].trim()),
         h: parseFloat(values[2].trim())
     };
+
+    console.log('<=', obj);
+    return obj;
 };
 
 /**
@@ -94,6 +110,8 @@ var GetYearlyRowFromHTML = (html, sf) => {
  * @returns {Object}
  */
 var GetMonthlyRowFromHTML = (html, month) => {
+    console.log('Function: GetMonthlyRowFromHTML');
+
     let key = '<td> ' + month + ' </td>',
         sp = html.indexOf(key);
 
@@ -127,12 +145,15 @@ var GetMonthlyRowFromHTML = (html, month) => {
         return null;
     }
 
-    return {
+    let obj = {
         ed: parseFloat(values[1].trim()),
         em: parseFloat(values[2].trim()),
         hd: parseFloat(values[3].trim()),
         hm: parseFloat(values[4].trim())
     };
+
+    console.log('<=', obj);
+    return obj;
 };
 
 /**
@@ -223,7 +244,11 @@ app.post('/', (req, res) => {
             break;
     }
 
+    console.log('Function: POST');
+
     if (error) {
+        console.log('err', err);
+
         res
             .status(400)
             .json({
@@ -268,11 +293,15 @@ app.post('/', (req, res) => {
             .json(values);
     })
     .catch((err) => {
+        console.log('err', err);
+
         res
             .set('Access-Control-Allow-Origin', origin)
             .set('Access-Control-Allow-Headers', 'Content-Type')
             .status(400)
-            .json(err);
+            .json({
+                message: err.toString()
+            });
     });
 });
 
