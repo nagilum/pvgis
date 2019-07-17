@@ -1,0 +1,1 @@
+gcloud functions deploy pvgis --region europe-west2 --runtime nodejs8 --trigger-http
