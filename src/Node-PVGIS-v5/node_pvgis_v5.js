@@ -484,46 +484,6 @@ app.post('/', (req, res) => {
                 }
             });
     });
-
-    // return new Promise((resolve, reject) => {
-    //     return resolve(QueryPvgisV5(input));
-    // })
-    // .then((obj) => {
-    //     console.log('Function: Promise => CSV');
-    //     console.log('obj', obj);
-
-    //     if (!obj.csv ||
-    //         obj.csv.indexOf('There were no valid daily radiation data for the chosen location') > -1) {
-    //             throw new Error('No valid data from PVGIS v5.');
-    //         }
-
-    //     return ParsePvgisCsv(obj);
-    // })
-    // .then((values) => {
-    //     console.log('Function: Promise => VALUES');
-    //     console.log('values', values);
-
-    //     res
-    //         .set('Access-Control-Allow-Origin', origin)
-    //         .set('Access-Control-Allow-Headers', 'Content-Type')
-    //         .json(values);
-    // })
-    // .catch((err) => {
-    //     console.log('Function: Promise => Error');
-    //     console.log('err', err);
-
-    //     res
-    //         .set('Access-Control-Allow-Origin', origin)
-    //         .set('Access-Control-Allow-Headers', 'Content-Type')
-    //         .status(400)
-    //         .json({
-    //             input: FormatInputValues(input),
-    //             data: {},
-    //             error: {
-    //                 message: err.toString()
-    //             }
-    //         });
-    // });
 });
 
 /**
