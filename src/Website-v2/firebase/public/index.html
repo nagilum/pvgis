@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Photovoltaic Geographical Information System (PVGIS) API</title>
+
+        <meta property="og:title" content="Photovoltaic Geographical Information System (PVGIS) API">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Photovoltaic Geographical Information System (PVGIS) API">
+        <meta property="og:url" content="https://pvgisjson.com/">
+        <meta property="og:image" content="https://pvgisjson.com/share.jpg">
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:500|Open+Sans:300,400,600&display=swap" rel="stylesheet">
+
+        <style type="text/css">*{box-sizing:border-box}body{background-color:#fff;color:#212121;font-family:'Open Sans',sans;font-size:16px;font-weight:400;margin:0;padding:0}body a{color:#1a73e8;text-decoration:none}body a:hover{text-decoration:underline}body a.fork-me{background-image:url('forkme_right_red.png');background-repeat:no-repeat;background-position:top right;background-size:100%;height:149px;position:absolute;right:0;top:0;width:149px;z-index:20}@media (max-width:1400px){body a.fork-me{height:112px;width:112px}}body h1,body h2,body h3,body h4{font-weight:300}body strong{font-weight:600}body header{background-color:#3c4043;color:#fff;font-size:14px;margin:0;padding:50px 0;top:0}body header h1{font-size:50px;line-height:50px;margin:0 auto;padding:0;width:1400px}@media (max-width:1450px){body header h1{padding-left:25px;padding-right:25px;width:100%}}body header summary{margin:0 auto;padding:10px 0 0;width:1400px}body header summary a{color:#bdc1c6}body header summary a:hover{color:#fff}@media (max-width:1450px){body header summary{padding-left:25px;padding-right:25px;width:100%}}body wrapper{display:block;margin:0 auto;overflow-x:hidden;overflow-y:auto;padding:50px 0;width:1400px}body wrapper article{float:left;left:auto;overflow-x:hidden;overflow-y:auto;padding:0 50px 0 0;position:relative;top:0;width:1200px}body wrapper article h1{font-size:40px;font-weight:400;line-height:40px;margin:0;padding:0}body wrapper article h2{font-size:30px;line-height:30px;margin:50px 0 0;padding:0}body wrapper article button{padding:10px}@media (max-width:500px){body wrapper article button{width:100%}}body wrapper article code{background-color:#f7f7f7;display:inline-block;font-family:'Roboto Mono',monospace;font-size:14px;font-weight:500;padding:1px 4px}body wrapper article pre{background-color:#f7f7f7;display:inline-block;font-family:'Roboto Mono',monospace;font-size:14px;font-weight:500;overflow-x:scroll;padding:8px;width:100%}body wrapper article pre span.default{color:#000}body wrapper article pre span.key{color:#099}body wrapper article pre span.number{color:#600}body wrapper article pre span.string{color:#660}body wrapper article pre.loading{background-image:url('ajax-loader.gif');background-position:center;background-repeat:no-repeat;color:transparent;height:100px}body wrapper article pre.loading span{display:none}body wrapper article div.table-wrapper{overflow-x:scroll;width:100%}body wrapper article table{min-width:900px;margin:0;overflow-x:scroll;padding:0;width:100%}body wrapper article table thead{margin:0;padding:0}body wrapper article table thead tr{margin:0;padding:0}body wrapper article table thead tr th{margin:0;padding:0;text-align:left;width:150px}body wrapper article table thead tr th:nth-child(4){width:300px}body wrapper article table thead tr th:nth-child(5){width:auto}body wrapper article table thead tr th.center{text-align:center}body wrapper article table tbody{margin:0;padding:0}body wrapper article table tbody tr{margin:0;padding:0}body wrapper article table tbody tr td{margin:0;padding:0;width:150px}body wrapper article table tbody tr td:nth-child(4){width:300px}body wrapper article table tbody tr td:nth-child(5){width:auto}body wrapper article table tbody tr td.center{text-align:center}body wrapper article table tbody tr td.auto-width{width:auto}body wrapper article table tbody tr td input[type=number],body wrapper article table tbody tr td select{padding:3px;width:200px}body wrapper article table tbody tr:nth-child(odd) td{background-color:#f7f7f7}body wrapper article table tbody tr:hover td{background-color:#f7f7f7}body wrapper article table.auto-width{min-width:auto}body wrapper article table.auto-width thead tr th{width:auto !important}@media (max-width:1450px){body wrapper article{padding-left:25px;width:824px}}@media (max-width:1024px){body wrapper article{padding-right:25px;width:100%}}body wrapper nav{border-left:4px solid #039be5;float:right;font-size:13px;left:auto;line-height:16px;margin:0;overflow-x:hidden;overflow-y:auto;padding:3px 0 0 12px;position:relative;top:0;width:200px}body wrapper nav strong{color:#757575;font-weight:600}body wrapper nav ul{list-style:none;margin:0;padding:3px 0 0}body wrapper nav ul li{margin:0;padding:3px 0}body wrapper nav ul li a{color:#212121}body wrapper nav ul li a:hover{color:#1a73e8}@media (max-width:1024px){body wrapper nav{display:none}}@media (max-width:1400px){body wrapper{width:100%}}body footer{background-color:#3c4043;color:#fff;font-size:14px;margin:0;padding:50px 0}body footer a{color:#bdc1c6}body footer a:hover{color:#fff}body footer p{margin:0 auto;padding:5px 0;width:1400px}@media (max-width:1450px){body footer p{padding-left:25px;padding-right:25px;width:100%}}</style>
+    </head>
+    <body>
+        <header>
+            <h1>PVGIS API</h1>
+            <summary>
+                API to get solar irradiation data from the <a href="https://re.jrc.ec.europa.eu/">Europe JRC</a> Photovoltaic Geographical Information System (PVGIS) service.
+            </summary>
+        </header>
+
+        <wrapper>
+            <article>
+                <h1 id="overview">PVGIS API</h1>
+                <p>
+                    Solar energy is one of the environmentally sustainable resources for producing electricity using photovoltaic (PV) systems.                        
+                    The main input data used in the planning process is solar radiation.
+                    The <a href="https://re.jrc.ec.europa.eu/">Europe JRC</a> has an <a href="https://re.jrc.ec.europa.eu/pvg_tools/en/tools.html">app</a> online which you can use to calculate PV values, bus sadly they have no (good) API.
+                    That's where this website/API comes into play.
+                </p>
+                <p>
+                    The PVGIS API provides a simple API endpoint which you can get the same values via JSON.
+                    The API and <a href="https://github.com/nagilum/pvgis">source code</a> is freely available to use under the <a href="https://github.com/nagilum/pvgis/blob/master/LICENSE.md">MIT license</a>.
+                </p>
+
+                <h2 id="theprocess">The Process</h2>
+                <p>
+                    What this API does is three-fold operation:
+                </p>
+                <ul>
+                    <li>Firstly we take the lat/lng and queries <a href="https://re.jrc.ec.europa.eu/pvgis5/extent.php">https://re.jrc.ec.europa.eu/pvgis5/extent.php</a> to see which global database we should use.</li>
+                    <li>Next up we take the database, the lat/lng, and other values submitted (or their default values) and queries <a href="https://re.jrc.ec.europa.eu/pvgis5/PVcalc.php">https://re.jrc.ec.europa.eu/pvgis5/PVcalc.php</a> to give us the actual values.</li>
+                    <li>The document we get back is a bastard mix of a plain text document and a CSV file, so we have to strip out some info from the plain text as well as the values from the CSV part, then present them in a beautiful JSON.</li>
+                </ul>
+
+                <h2 id="apidocumentation">API Documentation</h2>
+                <p>
+                    The API endpoint is <code>https://europe-west2-pvgisjson-api.cloudfunctions.net/pvgis</code> and only answers to <code>POST</code>.
+                </p>
+                <p>
+                    There are a total of eight parameters you can submit, two of which are required.
+                    Hover/click on each parameter to see a description.
+                </p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th class="center">Type</th>
+                                <th class="center">Required</th>
+                                <th>Possible Values</th>
+                                <th>Default Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <code title="The latitude of the location to fetch data for.">lat</code><br>
+                                </td>
+                                <td class="center">Decimal</td>
+                                <td class="center">Yes</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <code title="The longitude of the location to fetch data for.">lng</code><br>
+                                </td>
+                                <td class="center">Decimal</td>
+                                <td class="center">Yes</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>                        
+                            <tr>
+                                <td>
+                                    <code title="This is the power that the manufacturer declares that the PV array can produce under standard test conditions, which are a constant 1000W of solar irradiation per square meter in the plane of the array, at an array temperature of 25°C.">peakpower</code><br>
+                                </td>
+                                <td class="center">Integer</td>
+                                <td class="center">No</td>
+                                <td>-</td>
+                                <td><code>1</code></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <code title="The estimated system losses are all the losses in the system, which cause the power actually delivered to the electricity grid to be lower than the power produced by the PV modules.">loss</code><br>
+                                </td>
+                                <td class="center">Integer</td>
+                                <td class="center">No</td>
+                                <td>Range from <code>0</code> to <code>100</code></td>
+                                <td><code>14</code></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <code title="This is the angle of the PV modules from the horizontal plane, for a fixed (non-tracking) mounting.">angle</code><br>
+                                </td>
+                                <td class="center">Integer</td>
+                                <td class="center">No</td>
+                                <td>Range from <code>0</code> to <code>90</code></td>
+                                <td><code>35</code></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <code title="The azimuth, or orientation, is the angle of the PV modules relative to the direction due South. -90° is East, 0° is South and 90° is West.">aspect</code><br>
+                                </td>
+                                <td class="center">Integer</td>
+                                <td class="center">No</td>
+                                <td>Range from <code>-180</code> to <code>180</code></td>
+                                <td><code>0</code></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <code title="For fixed (non-tracking) systems, the way the modules are mounted will have an influence on the temperature of the module, which in turn affects the efficiency. In the application there are two possibilities: free-standing, meaning that the modules are mounted on a rack with air flowing freely behind the modules; and building-integrated, which means that the modules are completely built into the structure of the wall or roof of a building, with no air movement behind the modules.">mounting</code><br>
+                                </td>
+                                <td class="center">String</td>
+                                <td class="center">No</td>
+                                <td><code>free</code> or <code>building</code></td>
+                                <td><code>free</code></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <code title="The performance of PV modules depends on the temperature and on the solar irradiance, but the exact dependence varies between different types of PV modules. At the moment we can estimate the losses due to temperature and irradiance effects for the following types of modules: crystalline silicon cells; thin film modules made from CIS or CIGS and thin film modules made from Cadmium Telluride (CdTe).">pvtech</code><br>
+                                </td>
+                                <td class="center">String</td>
+                                <td class="center">No</td>
+                                <td><code>crystSi</code>, <code>CIS</code>, or <code>CdTe</code></td>
+                                <td><code>crystSi</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="responsebodyexplanation">Response Body Example</h2>
+                <ul>
+                    <li>The first part, <code>input</code>, holds the submitted input values, or their defaults.</li>
+                    <li>The second part, <code>data</code>, holds the actual parsed values from PVGIS.</li>
+                    <li>The third part, <code>info</code>, holds info what the <code>Ed</code>, <code>Em</code>, <code>Hd</code>, <code>Hm</code>, and <code>SDm</code> fields mean.</li>
+                </ul>
+                <pre class="json-beautify">{"input":{"database":{"info":"PVGIS database:","value":"PVGIS-CMSAF"},"lat":{"info":"Latitude","value":18.256},"lng":{"info":"Longitude","value":-1.055},"peakpower":{"info":"Nominal power of the PV system","value":1},"loss":{"info":"System losses(%)","value":14},"angle":{"info":"Fixed slope of modules (deg.)","value":35},"aspect":{"info":"Orientation (azimuth) of modules","value":0},"mounting":{"info":"Mounting position","value":"free"},"pvtech":{"info":"PV technology","value":"crystSi"}},"data":{"fixedAngle":{"monthly":{"jan":{"Ed":4.97,"Em":154,"Hd":6.31,"Hm":196,"SDm":16.6},"feb":{"Ed":5.27,"Em":148,"Hd":6.89,"Hm":193,"SDm":11.5},"mar":{"Ed":5.1,"Em":158,"Hd":6.84,"Hm":212,"SDm":9.75},"apr":{"Ed":4.43,"Em":133,"Hd":6.1,"Hm":183,"SDm":10.2},"may":{"Ed":3.95,"Em":122,"Hd":5.54,"Hm":172,"SDm":6.05},"jun":{"Ed":3.67,"Em":110,"Hd":5.15,"Hm":155,"SDm":7.41},"jul":{"Ed":3.64,"Em":113,"Hd":5.04,"Hm":156,"SDm":5.2},"aug":{"Ed":3.83,"Em":119,"Hd":5.24,"Hm":163,"SDm":5.37},"sep":{"Ed":4.29,"Em":129,"Hd":5.89,"Hm":177,"SDm":5.83},"oct":{"Ed":4.9,"Em":152,"Hd":6.65,"Hm":206,"SDm":7.25},"nov":{"Ed":4.99,"Em":150,"Hd":6.59,"Hm":198,"SDm":7.16},"dec":{"Ed":4.92,"Em":152,"Hd":6.28,"Hm":195,"SDm":9.92}},"yearly":{"Ed":4.49,"Em":137,"Hd":6.04,"Hm":184,"SDm":4.13}},"fixedSystem":{"aoi":{"info":"AOI loss (%)","value":2.7},"spectral":{"info":"Spectral effects (%)","value":-0.2},"temp":{"info":"Temperature and low irradiance loss (%)","value":10.9},"combined":{"info":"Combined losses (%)","value":25.6}}},"info":{"Ed":"Average daily energy production from the given system (kWh)","Em":"Average monthly energy production from the given system (kWh)","Hd":"Average daily sum of global irradiation per square meter received by the modules of the given system (kWh/m2)","Hm":"Average monthly sum of global irradiation per square meter received by the modules of the given system (kWh/m2)","SDm":"Standard deviation of the monthly energy production due to year-to-year variation (kWh)"}}</pre>
+                
+                <h2 id="examples">Examples</h2>
+                <p>
+                    The minimal parameters you need to submit are <code>lat</code> and <code>lng</code>.
+                </p>
+                <pre class="json-beautify">{"lat":18.256,"lng":-1.055}</pre>
+                <p>
+                    You can also submit all eight parameters. You cannot submit <code>database</code>, which you see in the <code>input</code> part of the response JSON, because it is determined by the <code>lat</code>/<code>lng</code> you submit.
+                </p>
+                <pre class="json-beautify">{"lat": 18.256,"lng": -1.055,"peakpower": 2,"loss": 15,"angle": 36,"aspect": 1,"mounting": "building","pvtech": "CIS"}</pre>
+
+                <h2 id="tryit">Try It</h2>
+                <p>
+                    Fill out the form below to try out the API.
+                </p>
+                <table class="auto-width">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <code>lat</code>
+                            </td>
+                            <td class="auto-width">
+                                <input id="try-it-lat" type="number" min="-90" max="90" step="0.01" value="18.256">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>lng</code>
+                            </td>
+                            <td class="auto-width">
+                                <input id="try-it-lng" type="number" min="-180" max="180" step="0.01" value="-1.055">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>peakpower</code>
+                            </td>
+                            <td class="auto-width">
+                                <input id="try-it-peakpower" type="number" step="1" value="1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>loss</code>
+                            </td>
+                            <td class="auto-width">
+                                <input id="try-it-loss" type="number" min="0" max="100" step="1" value="14">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>angle</code>
+                            </td>
+                            <td class="auto-width">
+                                <input id="try-it-angle" type="number" min="0" max="90" step="1" value="35">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>aspect</code>
+                            </td>
+                            <td class="auto-width">
+                                <input id="try-it-aspect" type="number" min="-180" max="180" step="1" value="0">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>mounting</code>
+                            </td>
+                            <td class="auto-width">
+                                <select id="try-it-mounting">
+                                    <option selected>free</option>
+                                    <option>building</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>pvtech</code>
+                            </td>
+                            <td class="auto-width">
+                                <select id="try-it-pvtech">
+                                    <option selected>crystSi</option>
+                                    <option>CIS</option>
+                                    <option>CdTe</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    <button id="try-it-execute">Call API</button>
+                </p>
+                <pre id="try-it-output" class="json-beautify">
+                    {
+                        "message": "Click the 'Call API' button to try it out!"
+                    }
+                </pre>
+            </article>
+            <nav>
+                <strong>Contents</strong>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#theprocess">The Process</a></li>
+                    <li><a href="#apidocumentation">API Documentation</a></li>
+                    <li><a href="#responsebodyexplanation">Response Body Explanation</a></li>
+                    <li><a href="#examples">Examples</a></li>
+                    <li><a href="#tryit">Try It</a></li>
+                </ul>
+            </nav>
+        </wrapper>
+
+        <footer>
+            <p>
+                &copy; 2019 Stian Hanger
+            </p>
+            <p>
+                Source code available over at <a href="https://github.com/nagilum/pvgis">GitHub</a>
+            </p>
+            <p>
+                Website favicon by <a href="http://www.iconarchive.com/artist/dapino.html">DaPino</a>
+            </p>
+        </footer>
+
+        <a href="https://github.com/nagilum/pvgis" class="fork-me"></a>
+
+        <script>﻿'use strict';const url='https://europe-west2-pvgisjson-api.cloudfunctions.net/pvgis';let syntaxHighlight=(json)=>{if(typeof json!='string'){json=JSON.stringify(json,undefined,2);}
+json=json.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,function(match){let cls='number';if(/^"/.test(match)){if(/:$/.test(match)){cls='key';}
+else{cls='string';}}
+else if(/true|false/.test(match)){cls='boolean';}
+else if(/null/.test(match)){cls='null';}
+return'<span class="'+cls+'">'+match+'</span>';});};let tryItExecute=(e)=>{let pre=document.querySelector('pre#try-it-output');let lat=document.querySelector('input#try-it-lat'),lng=document.querySelector('input#try-it-lng'),peakpower=document.querySelector('input#try-it-peakpower'),loss=document.querySelector('input#try-it-loss'),angle=document.querySelector('input#try-it-angle'),aspect=document.querySelector('input#try-it-aspect'),mounting=document.querySelector('select#try-it-mounting'),pvtech=document.querySelector('select#try-it-pvtech');let payload={lat:parseFloat(lat.value),lng:parseFloat(lng.value),peakpower:parseInt(peakpower.value,10),loss:parseInt(loss.value,10),angle:parseInt(angle.value,10),aspect:parseInt(aspect.value,10),mounting:mounting.value,pvtech:pvtech.value};pre.classList.add('loading');return fetch(url,{method:'POST',mode:'cors',cache:'no-cache',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then((res)=>{if(res.status!==200){throw new Error(res.statusText);}
+return res.json();}).then((json)=>{pre.innerHTML=syntaxHighlight(json).replace(new RegExp(':','g'),'<span class="default">:</span>');pre.classList.remove('loading');}).catch((err)=>{console.log('err',err);pre.classList.remove('loading');alert('Error. Check console!');});};(()=>{document.querySelectorAll('.json-beautify').forEach((pre)=>{pre.innerHTML=syntaxHighlight(JSON.parse(pre.innerText)).replace(new RegExp(':','g'),'<span class="default">:</span>');});document.querySelector('button#try-it-execute').addEventListener('click',tryItExecute);})();</script>
+    </body>
+</html>
