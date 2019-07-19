@@ -29,6 +29,7 @@ body {
             right: 0;
             top: 0;
             width: 149px;
+            z-index: 20;
 
             @media (max-width: 1400px) {
                 height: 112px;
@@ -51,6 +52,7 @@ body {
         font-size: 14px;
         margin: 0;
         padding: 50px 0;
+        top: 0;
 
         h1 {
             font-size: 50px;
@@ -58,6 +60,12 @@ body {
             margin: 0 auto;
             padding: 0;
             width: 1400px;
+
+            @media (max-width: 1450px) {
+                padding-left: 25px;
+                padding-right: 25px;
+                width: 100%;
+            }
         }
 
         summary {
@@ -71,6 +79,12 @@ body {
                 &:hover {
                     color: #fff;
                 }
+            }
+
+            @media (max-width: 1450px) {
+                padding-left: 25px;
+                padding-right: 25px;
+                width: 100%;
             }
         }
     }
@@ -106,6 +120,180 @@ body {
                 line-height: 30px;
                 margin: 50px 0 0;
                 padding: 0;
+            }
+
+            button {
+                padding: 10px;
+
+                @media (max-width: 500px) {
+                    width: 100%;
+                }
+            }
+
+            code {
+                background-color: #f7f7f7;
+                display: inline-block;
+                font-family: 'Roboto Mono', monospace;
+                font-size: 14px;
+                font-weight: 500;
+                padding: 1px 4px;
+            }
+
+            pre {
+                background-color: #f7f7f7;
+                display: inline-block;
+                font-family: 'Roboto Mono', monospace;
+                font-size: 14px;
+                font-weight: 500;
+                overflow-x: scroll;
+                padding: 8px;
+                width: 100%;
+
+                span {
+                    &.default {
+                        color: #000;
+                    }
+    
+                    &.key {
+                        color: #099;
+                    }
+    
+                    &.number {
+                        color: #600;
+                    }
+    
+                    &.string {
+                        color: #660;
+                    }
+                }
+
+                &.loading {
+                    background-image: url('ajax-loader.gif');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    color: transparent;
+                    height: 100px;
+
+                    span {
+                        display: none;
+                    }
+                }
+            }
+
+            div {
+                &.table-wrapper {
+                    overflow-x: scroll;
+                    width: 100%;
+                }
+            }
+
+            table {
+                min-width: 900px;
+                margin: 0;
+                overflow-x: scroll;
+                padding: 0;
+                width: 100%;
+
+                thead {
+                    margin: 0;
+                    padding: 0;
+
+                    tr {
+                        margin: 0;
+                        padding: 0;
+
+                        th {
+                            margin: 0;
+                            padding: 0;
+                            text-align: left;
+                            width: 150px;
+
+                            &:nth-child(4) {
+                                width: 300px;
+                            }
+
+                            &:nth-child(5) {
+                                width: auto;
+                            }
+
+                            &.center {
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+
+                tbody {
+                    margin: 0;
+                    padding: 0;
+
+                    tr {
+                        margin: 0;
+                        padding: 0;
+
+                        td {
+                            margin: 0;
+                            padding: 0;
+                            width: 150px;
+
+                            &:nth-child(4) {
+                                width: 300px;
+                            }
+
+                            &:nth-child(5) {
+                                width: auto;
+                            }
+
+                            &.center {
+                                text-align: center;
+                            }
+
+                            &.auto-width {
+                                width: auto;
+                            }
+
+                            input[type=number],
+                            select {
+                                padding: 3px;
+                                width: 200px;
+                            }
+                        }
+
+                        &:nth-child(odd) {
+                            td {
+                                background-color: #f7f7f7;
+                            }
+                        }
+
+                        &:hover {
+                            td {
+                                background-color: #f7f7f7;
+                            }
+                        }
+                    }
+                }
+
+                &.auto-width {
+                    min-width: auto;
+
+                    thead {
+                        tr {
+                            th {
+                                width: auto !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            @media (max-width: 1450px) {
+                padding-left: 25px;
+                width: 824px;
+            }
+
+            @media (max-width: 1024px) {
+                padding-right: 25px;
+                width: 100%;
             }
         }
 
@@ -146,6 +334,14 @@ body {
                     }
                 }
             }
+
+            @media (max-width: 1024px) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1400px) {
+            width: 100%;
         }
     }
 
@@ -168,6 +364,12 @@ body {
             margin: 0 auto;
             padding: 5px 0;
             width: 1400px;
+
+            @media (max-width: 1450px) {
+                padding-left: 25px;
+                padding-right: 25px;
+                width: 100%;
+            }
         }
     }
 }
