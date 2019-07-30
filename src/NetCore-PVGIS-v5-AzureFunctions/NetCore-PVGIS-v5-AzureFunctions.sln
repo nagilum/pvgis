@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore-PVGIS-v5-AzureFunctions", "NetCore-PVGIS-v5-AzureFunctions.csproj", "{34EAE8C8-19D2-450A-B732-A27A69E5EED3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34EAE8C8-19D2-450A-B732-A27A69E5EED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34EAE8C8-19D2-450A-B732-A27A69E5EED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34EAE8C8-19D2-450A-B732-A27A69E5EED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34EAE8C8-19D2-450A-B732-A27A69E5EED3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6A96907-6D76-4DD0-83A0-BFE75284EE3F}
+	EndGlobalSection
+EndGlobal
